@@ -44,7 +44,7 @@ class PaypalCommunicator {
     /**
      * @param Config $config
      * @param \PayPal\Api\WebProfile $webProfile
-     * @param $experienceProfileId
+     * @param string $experienceProfileId
      * @return bool
      */
     public static function UpdateExperienceProfile(Config $config, \PayPal\Api\WebProfile $webProfile, $experienceProfileId) {
@@ -65,8 +65,26 @@ class PaypalCommunicator {
         else return false;
     }
 
+    /**
+     * @param Config $config
+     * @param string $experienceProfileId
+     * @return bool
+     */
     public static function DeleteExperienceProfile(Config $config, $experienceProfileId) {
+        $webProfile = new \PayPal\Api\WebProfile();
+        $webProfile->setId($experienceProfileId);
 
+        // try to update
+        try {
+            $apiContext = self::getApiContext($config);
+
+            $webProfile->delete($apiContext);;
+        }
+        catch (\Exception $ex) {
+            return false;
+        }
+
+        return true;
     }
 
     private static function getApiContext(Config $config) {
