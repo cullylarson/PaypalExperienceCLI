@@ -24,8 +24,55 @@
  * IN THE SOFTWARE.
  */
 
+/*
+ * Setup
+ */
+
 require(__DIR__ . "/../src/ExperienceCli/Tools/Setup.php");
 
 Paypal\ExperienceCli\Tools\Setup::DoSetup();
 $config = Paypal\ExperienceCli\Tools\Setup::GetConfig();
 
+/*
+ * Get arguments
+ */
+
+if( count($argv) < 2 ) {
+    die("Usage: {$argv[0]} PROFILE_CLASS_NAME [PROFILE_NAMESPACE]\n");
+}
+
+$profileClassName = $argv[1];
+$profileNamespace = empty($argv[2]) ? null : $argv[2];
+
+/*
+ * Get our profile
+ */
+
+$profile = Paypal\ExperienceCli\Tools\ProfileFactory::ConstructProfileFromName($config->GetProfilesDirAbsolute(), $profileClassName, $profileNamespace);
+
+// didn't work
+if(!$profile) {
+    die("ERROR / Could not create an instance of the profile you provided.\n");
+}
+
+/*
+ * Build the web profile that we'll send to Paypal
+ */
+
+$webProfile = Paypal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile($config, $profile);
+
+/*
+ * Create it
+ */
+
+$response = Paypal\ExperienceCli\Tools\PaypalCommunicator::CreateWebProfile($config, $webProfile);
+
+// didn't work
+if( !$response ) {
+    die("ERROR / Something went wrong while communicating with Paypal, and we couldn't create this profile.");
+}
+// Success!
+else {
+    echo "Created profile: {$response}\n";
+    exit(0);
+}

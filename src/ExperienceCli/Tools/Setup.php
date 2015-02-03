@@ -50,12 +50,19 @@ class Setup {
          * Make sure required environment variables are set
          */
 
-        \Dotenv::required(array("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "PAYPAL_ENDPOINT_MODE"));
+        \Dotenv::required(array("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "PAYPAL_ENDPOINT_MODE", "PAYPAL_EXPERIENCE_CLI_PROFILES_DIR"));
 
         /*
          * Create a config object and return it
          */
 
-        return new Config(getenv("PAYPAL_CLIENT_ID"), getenv("PAYPAL_CLIENT_SECRET"), getenv("PAYPAL_ENDPOINT_MODE"));
+        $config = new Config(getenv("PAYPAL_CLIENT_ID"), getenv("PAYPAL_CLIENT_SECRET"), getenv("PAYPAL_ENDPOINT_MODE"), getenv("PAYPAL_EXPERIENCE_CLI_PROFILES_DIR"));
+
+        // make sure the profiles directory is valid
+        if(!$config->GetProfilesDirAbsolute()) {
+            die("ERROR / Could not find profiles directory.\n");
+        }
+
+        return $config;
     }
 }
