@@ -40,7 +40,7 @@ Create a web experience profile in PayPal.
 #### ARGUMENTS
 
 - **PROFILE_CLASS_NAME** *(required)* -- The name of your class (e.g. `MyFirstProfile`).  Don't include the .php extension.
-- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has namespace, provided it here (e.g. `"\\My\\Favorite\\Namespace"`).  Don't include a final `\` (it won't work).
+- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has a namespace, provide it here (e.g. `"\\My\\Favorite\\Namespace"`).  Don't include a final `\` (it won't work).
 
 
 ### list-experience-profiles
@@ -66,7 +66,7 @@ Update a web experience profile in PayPal.  You can do this by first editing the
 
 - **EXPERIENCE_PROFILE_ID** *(required)* -- The web experience profile ID of the profile you'd like to modify.  You can get this by listing your profiles.
 - **PROFILE_CLASS_NAME** *(required)* -- The name of your class (e.g. `MyFirstProfile`).  Don't include the .php extension.  Info from this class will be used to update your experience profile in PayPal.
-- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has namespace, provided it here (e.g. `"\\My\\Favorite\\Namespace"`).  Don't include a final `\` (it won't work).
+- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has a namespace, provide it here (e.g. `"\\My\\Favorite\\Namespace"`).  Don't include a final `\` (it won't work).
 
 
 ### remove-experience-profile
