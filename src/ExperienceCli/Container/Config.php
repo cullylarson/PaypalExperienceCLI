@@ -1,6 +1,6 @@
 <?php
 
-namespace Paypal\ExperienceCli\Container;
+namespace PayPal\ExperienceCli\Container;
 
 class Config {
     public $ClientId;

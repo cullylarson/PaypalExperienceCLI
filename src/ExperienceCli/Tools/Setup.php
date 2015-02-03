@@ -1,8 +1,8 @@
 <?php
 
-namespace Paypal\ExperienceCli\Tools;
+namespace PayPal\ExperienceCli\Tools;
 
-use Paypal\ExperienceCli\Container\Config;
+use PayPal\ExperienceCli\Container\Config;
 
 class Setup {
     /**

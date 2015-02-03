@@ -1,8 +1,8 @@
 <?php
 
-namespace Paypal\ExperienceCli\Tools;
+namespace PayPal\ExperienceCli\Tools;
 
-use Paypal\ExperienceCli\Profile;
+use PayPal\ExperienceCli\Profile;
 
 class WebProfileBuilder {
     /**

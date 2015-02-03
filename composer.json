@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Paypal\\ExperienceCli\\": "src/ExperienceCli"
+            "PayPal\\ExperienceCli\\": "src/ExperienceCli"
         }
     },
     "bin": []

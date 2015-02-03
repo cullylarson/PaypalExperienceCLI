@@ -1,6 +1,6 @@
 <?php
 
-namespace Paypal\ExperienceCli;
+namespace PayPal\ExperienceCli;
 
 abstract class Profile {
     /**

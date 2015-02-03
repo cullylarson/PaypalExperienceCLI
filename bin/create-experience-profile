@@ -30,8 +30,8 @@
 
 require(__DIR__ . "/../src/ExperienceCli/Tools/Setup.php");
 
-Paypal\ExperienceCli\Tools\Setup::DoSetup();
-$config = Paypal\ExperienceCli\Tools\Setup::GetConfig();
+PayPal\ExperienceCli\Tools\Setup::DoSetup();
+$config = PayPal\ExperienceCli\Tools\Setup::GetConfig();
 
 /*
  * Get arguments
@@ -48,7 +48,7 @@ $profileNamespace = empty($argv[2]) ? null : $argv[2];
  * Get our profile
  */
 
-$profile = Paypal\ExperienceCli\Tools\ProfileFactory::ConstructProfileFromName($config->GetProfilesDirAbsolute(), $profileClassName, $profileNamespace);
+$profile = PayPal\ExperienceCli\Tools\ProfileFactory::ConstructProfileFromName($config->GetProfilesDirAbsolute(), $profileClassName, $profileNamespace);
 
 // didn't work
 if(!$profile) {
@@ -59,13 +59,13 @@ if(!$profile) {
  * Build the web profile that we'll send to Paypal
  */
 
-$webProfile = Paypal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile($config, $profile);
+$webProfile = PayPal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile($config, $profile);
 
 /*
  * Create it
  */
 
-$response = Paypal\ExperienceCli\Tools\PaypalCommunicator::CreateWebProfile($config, $webProfile);
+$response = PayPal\ExperienceCli\Tools\PaypalCommunicator::CreateWebProfile($config, $webProfile);
 
 // didn't work
 if( !$response ) {
