@@ -15,7 +15,7 @@ class Setup {
          */
 
         $autoloadPaths = array(
-            __DIR__ . "/../../../../autoload.php", // likely location, if installed as a vendor package
+            __DIR__ . "/../../../../../autoload.php", // likely location, if installed as a vendor package
             __DIR__ . "/../../../vendor/autoload.php", // dev location
         );
 
