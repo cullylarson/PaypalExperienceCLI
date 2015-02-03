@@ -1,9 +1,9 @@
 {
-    "name": "cullylarson/PaypalExperienceCLI",
+    "name": "cullylarson/paypal-experience-cli",
     "type": "library",
     "description": "A set of command-line tools for managing 'web experience profiles' in Paypal.",
     "keywords": ["paypal", "cli", "experience", "profile"],
-    "homepage": "https://github.com/cullylarson/PaypalExperienceCLI",
+    "homepage": "https://github.com/cullylarson/paypal-experience-cli",
     "license": "MIT",
     "authors": [{
         "name": "Cully Larson",
