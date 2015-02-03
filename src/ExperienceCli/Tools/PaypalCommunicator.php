@@ -12,7 +12,7 @@ class PaypalCommunicator {
      */
     public static function CreateWebProfile(Config $config, \PayPal\Api\WebProfile $webProfile) {
         try {
-            $apiContext = self::createApiContext($config);
+            $apiContext = self::getApiContext($config);
 
             $response = $webProfile->create($apiContext);
         }
@@ -23,7 +23,49 @@ class PaypalCommunicator {
         return $response->getId();
     }
 
-    private static function createApiContext(Config $config) {
+    /**
+     * @param Config $config
+     * @return bool|\PayPal\Api\WebProfile[]    False if something goes wrong.  Otherwise, the profiles (NOTE: could be
+     * empty if there are not profiles).
+     */
+    public static function ListWebProfiles(Config $config) {
+        try {
+            $apiContext = self::getApiContext($config);
+
+            $profiles = \PayPal\Api\WebProfile::get_list($apiContext);
+        }
+        catch (\Exception $ex) {
+            return false;
+        }
+
+        return $profiles;
+    }
+
+    /**
+     * @param Config $config
+     * @param \PayPal\Api\WebProfile $webProfile
+     * @param $webProfileId
+     * @return bool
+     */
+    public static function UpdateWebProfile(Config $config, \PayPal\Api\WebProfile $webProfile, $webProfileId) {
+        // set the id
+        $webProfile->setId($webProfileId);
+
+        // try to update
+        try {
+            $apiContext = self::getApiContext($config);
+
+            $updated = $webProfile->update($apiContext);;
+        }
+        catch (\Exception $ex) {
+            return false;
+        }
+
+        if($updated) return true;
+        else return false;
+    }
+
+    private static function getApiContext(Config $config) {
         /*
          * Set up the context configuration
          */

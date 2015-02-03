@@ -1,7 +1,5 @@
 <?php
 
-namespace CullyTest;
-
 use PayPal\ExperienceCli\Profile;
 
 class SimpleProfile extends Profile {

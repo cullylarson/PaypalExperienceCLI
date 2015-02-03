@@ -1,0 +1,84 @@
+#!/usr/bin/env php
+<?php
+/* PaypalExperienceCli
+ *
+ * (The MIT license)
+ * Copyright (c) 2015 Cully Larson
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated * documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+
+/*
+ * Setup
+ */
+
+require(__DIR__ . "/../src/ExperienceCli/Tools/Setup.php");
+
+PayPal\ExperienceCli\Tools\Setup::DoSetup();
+$config = PayPal\ExperienceCli\Tools\Setup::GetConfig();
+
+/*
+ * Get profiles list
+ */
+
+$profiles = PayPal\ExperienceCli\Tools\PaypalCommunicator::ListWebProfiles($config);
+
+// didn't work
+if( $profiles === false ) {
+    die("ERROR / Something went wrong while communicating with Paypal, and we couldn't fetch your profiles. Enable logging and see what's wrong.  I assume this is your mistake and not mine.\n");
+}
+// no profiles
+else if( empty($profiles) ) {
+    echo "NO PROFILES\n";
+    exit(0);
+}
+
+/*
+ * We have profiles!
+ */
+
+echo "------------------------------------\n";
+
+foreach($profiles as $profile) {
+
+    $brandName = ($profile->getPresentation()->getBrandName()) ? $profile->getPresentation()->getBrandName() : "<default>";
+    $logoUrl = ($profile->getPresentation()->getLogoImage()) ? $profile->getPresentation()->getLogoImage() : "<no set>";
+    $landingPageType = $profile->getFlowConfig()->getLandingPageType();
+    $locale = $profile->getPresentation()->getLocaleCode();
+    $allowNote = ($profile->getInputFields()->getAllowNote()) ? "yes" : "no";
+    $noShipping = ($profile->getInputFields()->getNoShipping()) ? $profile->getInputFields()->getNoShipping(): "0";
+    $addressOverride = ($profile->getInputFields()->getAddressOverride()) ? $profile->getInputFields()->getAddressOverride(): "0";
+
+    echo <<< END
+ID: {$profile->getId()}
+NAME: {$profile->getName()}
+BRAND NAME: {$brandName}
+LOGO URL: {$logoUrl}
+LANDING PAGE TYPE:{$landingPageType}
+LOCALE: {$locale}
+ALLOW NOTE? {$allowNote}
+NO SHIPPING: {$noShipping}
+ADDRESS OVERRIDE: {$addressOverride}
+------------------------------------
+
+END;
+
+}
+
+exit(0);
