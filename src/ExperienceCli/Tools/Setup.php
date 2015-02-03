@@ -31,11 +31,8 @@ class Setup {
     }
 
     /**
-     * Loads the following environment variables, from the .env file in the current working directory (getcwd), and
-     * puts them in a Config container.
-     * - PAYPAL_CLIENT_ID
-     * - PAYPAL_CLIENT_SECRET
-     * - PAYPAL_ENDPOINT_MODE
+     * Loads environment variables from the .env file in the current working directory (getcwd), and puts them in a
+     * Config container.
      *
      * @return Config
      */
