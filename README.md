@@ -2,7 +2,7 @@
 
 A set of command-line tools for managing "web experience profiles" in Paypal.
 
-If Paypal's new PHP API
+PayPal now allows you to customize the payment experience your customers have, when they go to PayPal to make a payment (what used to be called Express Checkout).  To do this, you need to create web experience profiles in PayPal, using their new REST API.  It's stupid. I don't know why they don't just let you do that in your Developer Dashboard, but it's the way it is.  This is a simple command line tool that allows you to Create, List, Update, and Remove experience profiles. I hope it saves some of you the headache of having to implement something yourself.
 
 ## Install
 
@@ -27,7 +27,60 @@ A few of the commands ask for a profile name.  This is the class name of your pr
 
 ### create-experience-profile
 
-## Example
+Create a web experience profile in PayPal.
+
+#### USAGE
+
+```
+> php ./vendor/bin/create-experience-profile PROFILE_CLASS_NAME [PROFILE_NAMESPACE]
+```
+#### ARGUMENTS
+
+- **PROFILE_CLASS_NAME** *(required)* -- The name of your class (e.g. MyFirstProfile).  Don't include the .php extension.
+- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has namespace, provided it here (e.g. "\\My\\Favorite\\Namespace").  Don't include a final `\` (it won't work).
+
+
+### list-experience-profiles
+
+List all of the web experience profiles you have in PayPal.
+
+#### USAGE
+
+```
+> php ./vendor/bin/list-experience-profiles
+```
+
+### update-experience-profile
+
+Update a web experience profile in PayPal.  You can do this by first editing the `Profile` class you originally used to create this experience profile, or you can create a new class and just pass it as an argument.  Basically any changes to the class will be sent to PayPal.
+
+#### USAGE
+
+```
+> php ./vendor/bin/update-experience-profile EXPERIENCE_PROFILE_ID PROFILE_CLASS_NAME [PROFILE_NAMESPACE]
+```
+#### ARGUMENTS
+
+- **EXPERIENCE_PROFILE_ID** *(required)* -- The web experience profile ID of the profile you'd like to modify.  You can get this by listing your profiles.
+- **PROFILE_CLASS_NAME** *(required)* -- The name of your class (e.g. MyFirstProfile).  Don't include the .php extension.  Info from this class will be used to update your experience profile in PayPal.
+- **PROFILE_NAMESPACE** *(optional)* -- If your profile class has namespace, provided it here (e.g. "\\My\\Favorite\\Namespace").  Don't include a final `\` (it won't work).
+
+
+### remove-experience-profile
+
+Remove a web experience profile from PayPal.
+
+#### USAGE
+
+```
+> php ./vendor/bin/remove-experience-profile EXPERIENCE_PROFILE_ID
+```
+#### ARGUMENTS
+
+- **EXPERIENCE_PROFILE_ID** *(required)* -- The web experience profile ID of the profile you'd like to remove.  You can get this by listing your profiles.
+
+
+## Example of Everything
 
 ### 1. Create a directory for your profiles
 
