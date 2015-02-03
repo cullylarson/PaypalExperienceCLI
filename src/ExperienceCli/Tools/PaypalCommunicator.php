@@ -10,7 +10,7 @@ class PaypalCommunicator {
      * @param \PayPal\Api\WebProfile $webProfile
      * @return bool|string  False if something goes wrong.  Otherwise, the web profile id of the created profile.
      */
-    public static function CreateWebProfile(Config $config, \PayPal\Api\WebProfile $webProfile) {
+    public static function CreateExperienceProfile(Config $config, \PayPal\Api\WebProfile $webProfile) {
         try {
             $apiContext = self::getApiContext($config);
 
@@ -28,7 +28,7 @@ class PaypalCommunicator {
      * @return bool|\PayPal\Api\WebProfile[]    False if something goes wrong.  Otherwise, the profiles (NOTE: could be
      * empty if there are not profiles).
      */
-    public static function ListWebProfiles(Config $config) {
+    public static function ListExperienceProfiles(Config $config) {
         try {
             $apiContext = self::getApiContext($config);
 
@@ -44,12 +44,12 @@ class PaypalCommunicator {
     /**
      * @param Config $config
      * @param \PayPal\Api\WebProfile $webProfile
-     * @param $webProfileId
+     * @param $experienceProfileId
      * @return bool
      */
-    public static function UpdateWebProfile(Config $config, \PayPal\Api\WebProfile $webProfile, $webProfileId) {
+    public static function UpdateExperienceProfile(Config $config, \PayPal\Api\WebProfile $webProfile, $experienceProfileId) {
         // set the id
-        $webProfile->setId($webProfileId);
+        $webProfile->setId($experienceProfileId);
 
         // try to update
         try {
@@ -63,6 +63,10 @@ class PaypalCommunicator {
 
         if($updated) return true;
         else return false;
+    }
+
+    public static function DeleteExperienceProfile(Config $config, $experienceProfileId) {
+
     }
 
     private static function getApiContext(Config $config) {

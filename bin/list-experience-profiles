@@ -37,7 +37,7 @@ $config = PayPal\ExperienceCli\Tools\Setup::GetConfig();
  * Get profiles list
  */
 
-$profiles = PayPal\ExperienceCli\Tools\PaypalCommunicator::ListWebProfiles($config);
+$profiles = PayPal\ExperienceCli\Tools\PaypalCommunicator::ListExperienceProfiles($config);
 
 // didn't work
 if( $profiles === false ) {

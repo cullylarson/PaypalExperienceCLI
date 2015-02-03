@@ -65,7 +65,7 @@ $webProfile = PayPal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile(
  * Create it
  */
 
-$response = PayPal\ExperienceCli\Tools\PaypalCommunicator::CreateWebProfile($config, $webProfile);
+$response = PayPal\ExperienceCli\Tools\PaypalCommunicator::CreateExperienceProfile($config, $webProfile);
 
 // didn't work
 if( !$response ) {
