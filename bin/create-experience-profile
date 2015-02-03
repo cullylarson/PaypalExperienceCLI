@@ -59,7 +59,7 @@ if(!$profile) {
  * Build the web profile that we'll send to Paypal
  */
 
-$webProfile = PayPal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile($config, $profile);
+$webProfile = PayPal\ExperienceCli\Tools\WebProfileBuilder::ConstructWebProfile($profile);
 
 /*
  * Create it
@@ -69,7 +69,7 @@ $response = PayPal\ExperienceCli\Tools\PaypalCommunicator::CreateWebProfile($con
 
 // didn't work
 if( !$response ) {
-    die("ERROR / Something went wrong while communicating with Paypal, and we couldn't create this profile.");
+    die("ERROR / Something went wrong while communicating with Paypal, and we couldn't create this profile. Enable logging and see what's wrong.  I assume this is your mistake and not mine.\n");
 }
 // Success!
 else {

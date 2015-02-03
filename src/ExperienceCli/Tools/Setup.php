@@ -56,7 +56,7 @@ class Setup {
          * Create a config object and return it
          */
 
-        $config = new Config(getenv("PAYPAL_CLIENT_ID"), getenv("PAYPAL_CLIENT_SECRET"), getenv("PAYPAL_ENDPOINT_MODE"), getenv("PAYPAL_EXPERIENCE_CLI_PROFILES_DIR"));
+        $config = new Config(getenv("PAYPAL_CLIENT_ID"), getenv("PAYPAL_CLIENT_SECRET"), getenv("PAYPAL_ENDPOINT_MODE"), getenv("PAYPAL_EXPERIENCE_CLI_PROFILES_DIR"), getenv("PAYPAL_ENABLE_LOG"), getenv("PAYPAL_LOG_FILENAME"));
 
         // make sure the profiles directory is valid
         if(!$config->GetProfilesDirAbsolute()) {

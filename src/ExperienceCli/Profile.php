@@ -17,7 +17,7 @@ abstract class Profile {
      *
      * @return string|null
      */
-    public function GetBusinessName() { return null; }
+    public function GetBrandName() { return null; }
 
     /**
      * @return string

@@ -19,7 +19,7 @@ class WebProfileBuilder {
         $logoUrl = $profile->GetLogoUrl();
         if($logoUrl) $presentation->setLogoImage($logoUrl);
 
-        $businessName = $profile->GetBusinessName();
+        $businessName = $profile->GetBrandName();
         if($businessName) $presentation->setBrandName($businessName);
 
         $inputFields = new \PayPal\Api\InputFields();

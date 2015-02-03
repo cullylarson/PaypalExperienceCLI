@@ -24,11 +24,29 @@ class PaypalCommunicator {
     }
 
     private static function createApiContext(Config $config) {
+        /*
+         * Set up the context configuration
+         */
+
+        $contextConfig = array(
+            'mode' => $config->EndpointMode,
+            'log.LogEnabled' => false,
+        );
+
+        // if logs are enable
+        if($config->EnableLog) {
+            $contextConfig['log.LogEnabled'] = true;
+            $contextConfig['log.FileName'] = $config->LogFilename;
+            $contextConfig['log.LogLevel'] = "FINE";
+            $contextConfig['validation.level'] = "log";
+        }
+
+        /*
+         * Build the context object and return it
+         */
+
         $apiContext = new \PayPal\Rest\ApiContext(new \PayPal\Auth\OAuthTokenCredential($config->ClientId, $config->ClientSecret));
-        $apiContext->setConfig(array(
-                'mode' => $config->EndpointMode,
-                'log.LogEnabled' => false,
-        ));
+        $apiContext->setConfig($contextConfig);
 
         return $apiContext;
     }

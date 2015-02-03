@@ -7,14 +7,28 @@ class Config {
     public $ClientSecret;
     public $EndpointMode;
     public $ProfilesDir;
+    public $EnableLog;
+    public $LogFilename;
 
     private $profilesDirAbsolute;
 
-    public function __construct($clientId, $clientSecret, $endpointMode, $profilesDir) {
+    public function __construct($clientId, $clientSecret, $endpointMode, $profilesDir, $enableLog=0, $logFilename=null) {
         $this->ClientId = $clientId;
         $this->ClientSecret = $clientSecret;
         $this->EndpointMode = $endpointMode;
         $this->ProfilesDir = $profilesDir;
+        $this->SetEnableLog($enableLog);
+        $this->SetLogFilename($logFilename);
+    }
+
+    public function SetEnableLog($enableLog) {
+        $enableLog = empty($enableLog) ? 0 : 1;
+        $this->EnableLog = $enableLog;
+    }
+
+    public function SetLogFilename($logFilename) {
+        $logFilename = empty($logFilename) ? null : $logFilename;
+        $this->LogFilename = $logFilename;
     }
 
     public function GetProfilesDirAbsolute() {
