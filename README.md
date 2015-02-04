@@ -16,7 +16,7 @@ php composer.phar require cullylarson/paypal-experience-cli
 
 ## Configuration
 
-Configuration is done using a `.env` file (https://github.com/vlucas/phpdotenv).  An example file is provided, named `.env.dist`.  You can just copy it and set appropriately.  The `.env` file needs to be in the directory from which you are going to run commands.
+Configuration is done using environment variables. You can set these yourself, or set them in a `.env` file (https://github.com/vlucas/phpdotenv) which the experience commands will load automatically.  An example file is provided, named `.env.dist`.  You can just copy it and set appropriately.  If you want to use the `.env` file, it needs to be in the directory from which you are going to run commands. If you want to set the environment variables yourself, just look at the `.env.dist` file to see which ones you need to set.
 
 ## Profiles
 

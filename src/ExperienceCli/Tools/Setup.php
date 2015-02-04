@@ -38,10 +38,16 @@ class Setup {
      */
     public static function GetConfig() {
         /*
-         * Load environment variables
+         * Load environment variables (only if we have a .env file)
          */
 
-        \Dotenv::load(getcwd());
+        $envFilename = ".env";
+        $envDir = getcwd();
+        $envPath = "{$envDir}/{$envFilename}";
+
+        if( file_exists($envPath) ) {
+            \Dotenv::load($envDir, $envFilename);
+        }
 
         /*
          * Make sure required environment variables are set
